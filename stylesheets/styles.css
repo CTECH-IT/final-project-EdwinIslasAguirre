@@ -25,7 +25,7 @@ html, body {
 }
 
 body {
-    background: rgb(149, 194, 215);
+    background: rgb(109, 9, 9);
     display: flex;
     flex-direction: column;
     font-size: 10px;
@@ -104,8 +104,8 @@ a[href="#"] {
 }
 
 .thumbnail-title {
-    background: rgb(96, 125, 139);
-    color: rgb(202, 238, 255);
+    background: rgb(0, 0, 0);
+    color: rgb(207, 11, 11);
     display: block;
     font-size: 18px;
     margin: 0;
@@ -113,7 +113,7 @@ a[href="#"] {
 }
 
 .detail-image {
-    width: 50%;
+    width: 80%;
 }
 
 .thumbnail-list {
