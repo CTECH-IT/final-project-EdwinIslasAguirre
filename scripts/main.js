@@ -1,16 +1,20 @@
 const DETAIL_IMAGE_SELECTOR = '[data-image-role="target"]';
 const DETAIL_TITLE_SELECTOR = '[data-image-role="title"]';
+const DETAIL_DESCRIPTION_SELECTOR = '[data-image-role="description"]';
+const DETAIL_FRAME_SELECTOR = '[data-image-role="frame"]';
 const THUMBNAIL_LINK_SELECTOR = '[data-image-role="trigger"]';
-const HIDDEN_DETAIL_CLASS = 'hidden-detail';
-const ESC_KEY_CODE = 27;
+const SMALL_EFFECT_CLASS = 'is-small';
 
-function setDetails(imageUrl, titleText) {
+function setDetails(imageUrl, titleText, descriptionText) {
     'use strict';
     let detailImage = document.querySelector(DETAIL_IMAGE_SELECTOR);
     detailImage.setAttribute('src', imageUrl);
 
     let detailTitle = document.querySelector(DETAIL_TITLE_SELECTOR);
     detailTitle.textContent = titleText;
+
+    let description = document.querySelector(DETAIL_DESCRIPTION_SELECTOR);
+    description.textContent = descriptionText;
 }
 
 function imageFromThumb(thumbnail) {
@@ -23,61 +27,48 @@ function titleFromThumb(thumbnail) {
     return thumbnail.getAttribute('data-image-title');
 }
 
-function setDetailsFromThumb(thumbnail) {
+function descriptionFromThumb(thumbnail) {
     'use strict';
-    setDetails(imageFromThumb(thumbnail), titleFromThumb(thumbnail));
+    return thumbnail.getAttribute('data-image-description');
 }
 
-
-function addThumbClickHandler(thumb) {
+function setDetailsFromThumb(thumbnail) {
     'use strict';
-    thumb.addEventListener('click', function(event) {
-        event.preventDefault(); // stop browser from following the href link
-        setDetailsFromThumb(thumb);
-        showDetails(); //show the big detail image
-    });
+    setDetails(imageFromThumb(thumbnail), titleFromThumb(thumbnail),
+    descriptionFromThumb(thumbnail));
 }
 
 function getThumbnailsArray() {
     'use strict';
     let thumbnails = document.querySelectorAll(THUMBNAIL_LINK_SELECTOR);
-    let thumbnailArray = [].slice.call(thumbnails); // convert the NodeList to an array
+    let thumbnailArray = [].slice.call(thumbnails);
     return thumbnailArray;
 }
 
-
-// add the CSS class to the <body> to hide the image detail 
-function hideDetails() {
+function addThumbClickHandler(thumb) {
     'use strict';
-    document.body.classList.add(HIDDEN_DETAIL_CLASS);
+    thumb.addEventListener('click', function(event) {
+        event.preventDefault();
+        setDetailsFromThumb(thumb);
+        showDetails();
+    });
 }
 
-// remove the CSS class from <body> to show the detail image
 function showDetails() {
     'use strict';
-    document.body.classList.remove(HIDDEN_CLASS_DETAIL);
-}
-
-function addKeyPressHandler() {
-    'use strict';
-    document.body.addEventListener('keyup', function(event) {
-        event.preventDefault();
-        console.log(event.keyCode);
-        if (event.keyCode === ESC_KEY_CODE) {
-            hideDetails();
-        }
-    });
+    let frame = document.querySelector(DETAIL_FRAME_SELECTOR);
+    frame.classList.add(SMALL_EFFECT_CLASS);
+    setTimeout(function() {
+        frame.classList.remove(SMALL_EFFECT_CLASS);
+    }, 50);
 }
 
 function initializeEvents() {
     'use strict';
     let thumbnails = getThumbnailsArray();
     thumbnails.forEach(addThumbClickHandler);
-    addKeyPressHandler();
 }
 
-// run all the functions to link the thumbnails to the callback
-// that will update the main detail image with thumbnail's image and title
 initializeEvents();
 
 
