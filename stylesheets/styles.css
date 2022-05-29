@@ -21,6 +21,7 @@
 }
 
 html, body {
+    color: white;
     height: 100%;
 }
 
@@ -32,6 +33,7 @@ body {
 }
 
 a[href="#"] {
+    color: white; 
     text-decoration: none;
     color:rgb(255, 255, 255)
 }
@@ -73,8 +75,6 @@ a[href="#"] {
 
 .thumbnail-item {
     display: inline-block;
-    border: 1px solid rgb(100%, 100%, 100%);
-    border: 1px solid rgba(100%, 100%, 100%, 0.8);
     width: 300px;
     margin: 5px;
     transition: transform 133ms ease-in-out;
@@ -88,9 +88,8 @@ a[href="#"] {
     display: flex;
     flex: 0 1 auto;
     list-style: none;
-    order: 0;
+    order: 2;
 
-    overflow-x: auto;
     padding: 10px 0;
     white-space: nowrap;
 }
