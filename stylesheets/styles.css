@@ -26,7 +26,7 @@ html, body {
 }
 
 body {
-    background: rgb(99, 0, 0);
+    background: rgb(180, 0, 0);
     display: flex;
     flex-direction: column;
     font-size: 10px;
